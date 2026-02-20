@@ -673,3 +673,21 @@ public class FilterStringsByCharacter {
         // Output with 'a': [apple, banana, grape, orange]
     }
 }
+
+30. Concatenate a List of Strings from List using Java 8 Stream
+
+public class ConcatenateStrings {
+    public static void main(String[] args) {
+        // Initializing a list of strings
+        List<String> words = Arrays.asList("Apple", "Banana", "Orange");
+
+        // Using Java 8 Stream API to concatenate strings with a comma and space
+        String concatenatedString = words.stream()
+                .collect(Collectors.joining(", ")); // Joining strings with delimiter
+
+        // Printing the result
+        System.out.println(concatenatedString);
+        
+        // Output: Apple, Banana, Orange
+    }
+}
