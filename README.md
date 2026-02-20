@@ -1281,3 +1281,24 @@ public class ReverseCharacters {
         // Output for ["apple", "banana", "cherry"]: [elppa, ananab, yrrehc]
     }
 }
+
+
+56. Find All Unique Characters in String using Java 8 Streams API
+
+
+public class FindUniqueCharacters {
+    public static void main(String[] args) {
+        String str = "hello world";
+
+        // Using Stream API to find unique characters
+        Set<Character> uniqueChars = str.chars() // Returns an IntStream of character codes
+                .mapToObj(c -> (char) c)         // Convert int codes back to Character objects
+                .filter(c -> c != ' ')           // Optional: Exclude spaces
+                .collect(Collectors.toCollection(LinkedHashSet::new)); // Maintain insertion order
+
+        // Printing the result
+        System.out.println("Unique characters: " + uniqueChars);
+        
+        // Output: [h, e, l, o, w, r, d]
+    }
+}
