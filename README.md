@@ -691,3 +691,39 @@ public class ConcatenateStrings {
         // Output: Apple, Banana, Orange
     }
 }
+
+31. Collect Prime Numbers from a List using Java 8 Stream API
+
+public class PrimeNumberCollector {
+    
+    // Method to check if a number is prime
+    public static boolean isPrime(int num) {
+        if (num <= 1) return false;
+        if (num == 2) return true; // Special case for 2
+        
+        // Loop from 2 up to the square root of the number
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false; // Not a prime number
+            }
+        }
+        return true; // Is a prime number
+    }
+
+    public static void main(String[] args) {
+        // Initializing the list of integers
+        List<Integer> numbers = Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        // Using Java 8 Stream API to filter prime numbers
+        List<Integer> primeNumbers = numbers.stream()
+                .filter(PrimeNumberCollector::isPrime) // Using method reference to filter
+                .collect(Collectors.toList());        // Collecting result into a list
+
+        // Printing the result
+        System.out.println("Prime numbers: " + primeNumbers);
+        
+        // Output: Prime numbers: [2, 3, 5, 7]
+    }
+}
+
+
