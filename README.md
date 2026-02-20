@@ -76,3 +76,59 @@ public class Main {
         System.out.println(charCountMap);
     }
 }
+
+Or 
+
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        String name = "Gourab Banik";
+
+        Map<Character, Long> charCountMap =
+                Arrays.stream(name.split(" "))   // split by space
+                      .map(String::toLowerCase)  // lowercase each word
+                      .flatMap(word ->
+                              word.chars().mapToObj(c -> (char) c)
+                      )
+                      .collect(Collectors.groupingBy(
+                              c -> c,
+                              Collectors.counting()
+                      ));
+
+        System.out.println(charCountMap);
+    }
+}
+
+4. Sort distinct number using stream
+
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        int[] arr = {5, 3, 1, 2, 3, 5, 4, 2};
+
+        List<Integer> result =
+                Arrays.stream(arr)
+                      .distinct()
+                      .sorted()
+                      .boxed()
+                      .collect(Collectors.toList());
+
+        System.out.println("Sorted Distinct Numbers:");
+        System.out.println(result);
+    }
+}
+
+5. Reverse Order
+
+List<Integer> result =
+        Arrays.stream(arr)
+              .boxed()
+              .distinct()
+              .sorted(Comparator.reverseOrder())
+              .collect(Collectors.toList());
