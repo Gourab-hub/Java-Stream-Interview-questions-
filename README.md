@@ -491,7 +491,7 @@ public class SumWithReducer {
         // Sum using Reducer: 30
     }
 }
-Java 8 Stream API Interview Questions: Find Longest String in List Java 8 Stream API
+21. Java 8 Stream API Interview Questions: Find Longest String in List Java 8 Stream API
 
 public class LongestStringLengt {
     public static void main(String[] args) {
@@ -511,3 +511,22 @@ public class LongestStringLengt {
     }
 }
 
+22. Find the Second Highest Element in List using the Java 8
+
+public class SecondHighestElement {
+    public static void main(String[] args) {
+        // Initializing the list of integers
+        List<Integer> numbers = Arrays.asList(3, 8, 15, 10, 12, 25, 7);
+
+        // Using Java 8 Stream API to find the second highest element
+        Optional<Integer> secondHighestNum = numbers.stream()
+                .sorted((a, b) -> b.compareTo(a)) // Sort in descending order
+                .skip(1)                         // Skip the first (highest) element
+                .findFirst();                    // Get the next element (second highest)
+
+        // Printing the result if present
+        secondHighestNum.ifPresent(System.out::println);
+        
+        // Output: 15
+    }
+}
