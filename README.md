@@ -879,3 +879,58 @@ public class FibonacciNumber {
     }
 }
 
+
+39.  Count Palindromes in a List using Stream API in Java
+
+public class CountPalindromes {
+    public static void main(String[] args) {
+        // Initializing the list of strings
+        List<String> words = Arrays.asList("madam", "apple", "racecar", "banana", "level");
+
+        // Using Java 8 Stream API to count palindromic strings
+        long count = words.stream()
+                .filter(word -> word.equals(new StringBuilder(word).reverse().toString())) // Check if palindrome
+                .count(); // Count the filtered results
+
+        // Printing the result
+        System.out.println("Number of palindromes: " + count);
+        
+        // Output: Number of palindromes: 3
+    }
+}
+
+40. Find All Subsets of a List using Stream API Java 8
+
+public class AllSubsets {
+    public static void main(String[] args) {
+        // Initializing the input list
+        List<Integer> list = Arrays.asList(1, 2, 3);
+
+        // List of lists to store all subsets
+        List<List<Integer>> subsets = new ArrayList<>();
+        
+        // Step 1: Add the empty set to the list of subsets
+        subsets.add(new ArrayList<>());
+
+        // Step 2: Iterate through each element in the input list
+        for (Integer element : list) {
+            // Temporary list to store new subsets generated in this iteration
+            List<List<Integer>> newSubsets = new ArrayList<>();
+            
+            // For every existing subset, create a new one by adding the current element
+            for (List<Integer> subset : subsets) {
+                List<Integer> newSubset = new ArrayList<>(subset);
+                newSubset.add(element);
+                newSubsets.add(newSubset);
+            }
+            
+            // Add all newly created subsets to the main list
+            subsets.addAll(newSubsets);
+        }
+
+        // Printing the result
+        System.out.println("All Subsets: " + subsets);
+        
+        // Output for [1, 2, 3]: [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+    }
+}
