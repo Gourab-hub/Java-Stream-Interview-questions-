@@ -491,4 +491,23 @@ public class SumWithReducer {
         // Sum using Reducer: 30
     }
 }
+Java 8 Stream API Interview Questions: Find Longest String in List Java 8 Stream API
+
+public class LongestStringLengt {
+    public static void main(String[] args) {
+        // Initializing a list of strings 
+        List<String> list = Arrays.asList("Apple", "Banana", "Grapefruit", "Kiwi");
+
+        // Using Java 8 Stream API to find the maximum length 
+        int longStrLength = list.stream()
+                .mapToInt(String::length) // Mapping each string to its length
+                .max()                    // Finding the maximum value
+                .orElse(0);               // Returning 0 if the list is empty
+
+        // Printing the result [00:03:23]
+        System.out.println("Longest string length: " + longStrLength);
+        
+        // Output: Longest string length: 10
+    }
+}
 
