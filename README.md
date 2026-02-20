@@ -322,3 +322,28 @@ public class FlattenList {
         // Flattened List: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     }
 }
+
+
+14. partition numbers into even and odd lists using the Java 8 Stream API
+
+public class PartitionByEvenOdd {
+    public static void main(String[] args) {
+        // 1. Create a list of numbers
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        // 2. Partition numbers into even and odd
+        Map<Boolean, List<Integer>> partitioned = numbers.stream()
+            .collect(Collectors.partitioningBy(n -> n % 2 == 0));
+
+        // 3. Extract and print the results
+        List<Integer> evenList = partitioned.get(true);
+        List<Integer> oddList = partitioned.get(false);
+
+        System.out.println("Even List: " + evenList);
+        System.out.println("Odd List: " + oddList);
+        
+        // Output:
+        // Even List: [2, 4, 6, 8, 10]
+        // Odd List: [1, 3, 5, 7, 9]
+    }
+}
