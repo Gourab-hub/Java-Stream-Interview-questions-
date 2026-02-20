@@ -1086,3 +1086,23 @@ public class CheckSubList {
         // Output for [1,2,3,4,5,6] and [3,4,5]: true
     }
 }
+
+47. Find Common Elements Between Two Lists using Java 8 Streams
+
+public class FindCommonElements {
+    public static void main(String[] args) {
+        // Defining the two lists
+        List<String> list1 = Arrays.asList("apple", "banana", "grape", "orange");
+        List<String> list2 = Arrays.asList("banana", "grape", "kiwi");
+
+        // Using Stream API to find common elements
+        Set<String> commonElements = list1.stream()
+                .filter(list2::contains)  // Keep elements that are also present in list2
+                .collect(Collectors.toSet()); // Collect result into a Set to ensure uniqueness
+
+        // Printing the result
+        System.out.println("Common list elements: " + commonElements);
+        
+        // Output for the sample input: [banana, grape]
+    }
+}
