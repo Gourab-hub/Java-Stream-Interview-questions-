@@ -1065,3 +1065,24 @@ public class CharGroup {
         // Output: {s=1, a=2, u=1, r=1, b=1, h=1}
     }
 }
+
+
+
+46. Check If a List Contains a Sub-list using Java 8 Streams API
+
+public class CheckSubList {
+    public static void main(String[] args) {
+        // Main list and the sub-list to search for
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> subList = Arrays.asList(3, 4, 5);
+
+        // logic to check if subList exists within list
+        boolean containsSubList = IntStream.rangeClosed(0, list.size() - subList.size())
+                .anyMatch(i -> list.subList(i, i + subList.size()).equals(subList));
+
+        // Result
+        System.out.println("Contains sub-list: " + containsSubList);
+        
+        // Output for [1,2,3,4,5,6] and [3,4,5]: true
+    }
+}
