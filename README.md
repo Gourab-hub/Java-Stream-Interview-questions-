@@ -368,3 +368,43 @@ public class WordFrequency {
         // Output: // Element Frequencies: {orange=1, banana=3, apple=2}
     }
 }
+
+16. merge two lists into a single list using the Java 8 Stream API.
+
+public class MergeLists {
+    public static void main(String[] args) {
+        // 1. Create two lists
+        List<String> list1 = Arrays.asList("apple", "banana", "grape");
+        List<String> list2 = Arrays.asList("orange", "kiwi", "pear");
+
+        // 2. Merge lists using Stream.concat
+        List<String> mergedList = Stream.concat(list1.stream(), list2.stream())
+                                        .collect(Collectors.toList());
+
+        // 3. Print the result
+        System.out.println("Merged List: " + mergedList);
+        
+        // Output:
+        // Merged List: [apple, banana, grape, orange, kiwi, pear]
+    }
+}
+
+17. convert a list of integers into their square values using the Java 8 Stream API.
+
+public class SquareList {
+    public static void main(String[] args) {
+        // 1. Create a list of integers
+        List<Integer> numbers = Arrays.asList(2, 3, 4, 5, 6);
+
+        // 2. Convert each number to its square using Stream API
+        List<Integer> squareNumbers = numbers.stream()
+            .map(n -> n * n)               // Transform each element: n squared
+            .collect(Collectors.toList()); // Collect into a new list
+
+        // 3. Print the result
+        System.out.println("Squared Numbers: " + squareNumbers);
+        
+        // Output:
+        // Squared Numbers: [4, 9, 16, 25, 36]
+    }
+}
