@@ -859,3 +859,23 @@ public class MedianValue {
         // Output for [1, 3, 5, 7, 9, 11]: Median: 6.0
     }
 }
+
+38. Generate List of First 10 Fibonacci Numbers using Stream API
+
+public class FibonacciNumber {
+    public static void main(String[] args) {
+        int termNumber = 10; // Number of Fibonacci elements to generate
+
+        // Using Java 8 Stream API to generate the Fibonacci series
+        List<Integer> fibonacciNumbers = Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]})
+                .limit(termNumber)         // Limiting to first 10 terms
+                .map(t -> t[0])            // Extracting the first element of each pair
+                .collect(Collectors.toList());
+
+        // Printing the result
+        System.out.println(fibonacciNumbers);
+        
+        // Output for termNumber = 10: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+    }
+}
+
