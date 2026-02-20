@@ -1153,3 +1153,46 @@ public class FindFirstLongestWord {
         // Output for the sample sentence: capgemini
     }
 }
+
+50. Count Vowels in a List of Strings using Java 8 Streams API
+
+public class CountVowels {
+    public static void main(String[] args) {
+        // Sample list of strings
+        List<String> words = Arrays.asList("apple", "banana", "grape", "orange");
+
+        // Reference string containing all vowels (case-insensitive)
+        String vowels = "AEIOUaeiou";
+
+        // Using Stream API to count total vowels
+        long count = words.stream()
+                .flatMapToInt(String::chars) // Convert each string to an IntStream of characters
+                .filter(c -> vowels.indexOf(c) != -1) // Keep only characters found in the vowels string
+                .count(); // Count the occurrences
+
+        // Output the result
+        System.out.println("Total Vowels: " + count);
+        
+        // Output for ["apple", "banana", "grape", "orange"]: 10
+    }
+}
+
+51.  Find the Shortest String in a List using Java 8 Stream API
+public class FindShortestString {
+    public static void main(String[] args) {
+        // Sample list of strings
+        List<String> words = Arrays.asList("apple", "banana", "kiwi", "orange", "grape");
+
+        // Using Stream API to find the shortest string
+        Optional<String> shortestString = words.stream()
+                .min((s1, s2) -> Integer.compare(s1.length(), s2.length()));
+
+        // Display the result if present
+        shortestString.ifPresent(word -> 
+            System.out.println("Shortest string in list: " + word)
+        );
+        
+        // Output for ["apple", "banana", "kiwi", "orange", "grape"]: kiwi
+    }
+}
+
