@@ -1198,3 +1198,46 @@ public class FindShortestString {
     }
 }
 
+52. Find First Repeated Element in a List using Java 8 Stream API
+
+public class FindFirstRepeated {
+    public static void main(String[] args) {
+        // Sample input list with duplicates
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 4, 2, 5, 3, 6);
+
+        // A Set to store unique elements as we process the stream
+        Set<Integer> seen = new HashSet<>();
+
+        // Logic to find the first repeated element
+        int firstRepeated = numbers.stream()
+                .filter(n -> !seen.add(n)) // If add(n) returns false, the number is already in the set
+                .findFirst()                // Get the very first one that triggers the filter
+                .orElse(-1);               // Default value if no repeats are found
+
+        // Result Output
+        System.out.println("First repeated element: " + firstRepeated);
+        
+        // Output for [1, 2, 3, 4, 5, 4, 2, 5, 3, 6]: 4
+    }
+}
+
+53. Sort Strings by Their Last Character using Java 8 Streams API
+
+public class SortByLastChar {
+    public static void main(String[] args) {
+        // Sample list of strings
+        List<String> words = Arrays.asList("apple", "banana", "grape", "orange", "kiwi");
+
+        // Using Stream API to sort by the last character
+        List<String> sortedWords = words.stream()
+                .sorted(Comparator.comparingInt(s -> s.charAt(s.length() - 1)))
+                .collect(Collectors.toList());
+
+        // Printing the result
+        System.out.println("Sorted by last character: " + sortedWords);
+        
+        // Output: [banana, apple, grape, orange, kiwi]
+        // Note: banana ends in 'a' (first). apple, grape, orange end in 'e' (original order maintained).
+    }
+}
+
