@@ -592,3 +592,44 @@ public class SkipFirstThreeElements {
         // Output: [Grape, Kiwi]
     }
 }
+
+
+26.  Check if No Elements in List are Negative Using Java 8 Stream
+
+
+public class NegativeNumbers {
+    public static void main(String[] args) {
+        // Initializing the list of integers
+        List<Integer> numbers = Arrays.asList(1, 5, 10, 15);
+
+        // Using Java 8 Stream API to check if NO elements are negative
+        boolean noNegativeNumber = numbers.stream()
+                .noneMatch(n -> n < 0); // Condition: none of the numbers are less than 0
+
+        // Printing the result
+        System.out.println("No negative numbers: " + noNegativeNumber);
+        
+        // Scenario 1 Output: No negative numbers: true
+        
+        // Scenario 2: If we change one number to negative (e.g., -5)
+        // Output for Scenario 2: No negative numbers: false
+    }
+}
+
+27. Find the Smallest Element in a List Using Java 8 Stream API
+
+public class FindMinimum {
+    public static void main(String[] args) {
+        // Initializing the list of integers
+        List<Integer> numbers = Arrays.asList(12, 45, 23, 5, 87, 9, 19);
+
+        // Using Java 8 Stream API to find the minimum value
+        Optional<Integer> min = numbers.stream()
+                .min(Integer::compareTo); // Comparing elements to find the smallest
+
+        // Printing the result if a value is present
+        min.ifPresent(value -> System.out.println("Minimum number is: " + value));
+        
+        // Output: Minimum number is: 5
+    }
+}
