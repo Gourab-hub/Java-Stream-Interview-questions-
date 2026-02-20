@@ -1106,3 +1106,50 @@ public class FindCommonElements {
         // Output for the sample input: [banana, grape]
     }
 }
+
+48. Find Element Closest to a Given Value from List using Java 8
+
+public class FindClosestValue {
+    public static void main(String[] args) {
+        // Sample list of numbers
+        List<Integer> numbers = Arrays.asList(10, 22, 35, 41);
+        int targetValue = 30;
+
+        // Using Stream API to find the closest element
+        int closestValue = numbers.stream()
+                .min((n1, n2) -> Integer.compare(
+                        Math.abs(n1 - targetValue), // Distance of n1 from target
+                        Math.abs(n2 - targetValue)  // Distance of n2 from target
+                ))
+                .orElse(0); // Default value if the list is empty
+
+        // Printing the result
+        System.out.println("Closest value to " + targetValue + ": " + closestValue);
+        
+        // Output for [10, 22, 35, 41] and target 30: 35
+    }
+}
+
+
+49. Find First Longest Word in A Sentence using the Java 8 Stream
+
+
+public class FindFirstLongestWord {
+    public static void main(String[] args) {
+        String sentence = "my name is saurabh kumar and i work at capgemini as a java developer";
+
+        // Approach 1: Using Arrays.stream and a custom comparator logic
+        String longestWord1 = Arrays.stream(sentence.split(" "))
+                .max((w1, w2) -> Integer.compare(w1.length(), w2.length()))
+                .orElse("");
+
+        // Approach 2: Using Comparator.comparingInt (more concise)
+        String longestWord2 = Arrays.stream(sentence.split(" "))
+                .max(Comparator.comparingInt(String::length))
+                .orElse("");
+
+        System.out.println("Longest Word: " + longestWord2);
+        
+        // Output for the sample sentence: capgemini
+    }
+}
