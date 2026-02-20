@@ -1302,3 +1302,61 @@ public class FindUniqueCharacters {
         // Output: [h, e, l, o, w, r, d]
     }
 }
+
+
+56. Find Longest Words in a Sentence Using Java 8 Streams API
+
+public class FindLongestWords {
+    public static void main(String[] args) {
+        String sentence = "my name is saurabh and i work at capgemini as a java developer";
+
+        // Step 1: Find the maximum length in the sentence
+        int maxLength = Arrays.stream(sentence.split(" "))
+                .mapToInt(String::length)
+                .max()
+                .orElse(0);
+
+        // Step 2: Collect all words that have this maximum length
+        List<String> longestWords = Arrays.stream(sentence.split(" "))
+                .filter(word -> word.length() == maxLength)
+                .collect(Collectors.toList());
+
+        // Printing the result
+        System.out.println("Longest word(s): " + longestWords);
+        
+        // Output for the sample sentence: [capgemini, developer]
+    }
+}
+
+
+57. Find Longest Palindrome in a List using Java 8 Streams API
+
+public class LongestPalindrome {
+    public static void main(String[] args) {
+        List<String> words = Arrays.asList("madam", "hello", "civic", "noon", "level", "racecar", "cap");
+
+        // Step 1: Filter the list to find all palindromes
+        List<String> palindromes = words.stream()
+                .filter(word -> word.equalsIgnoreCase(new StringBuilder(word).reverse().toString()))
+                .collect(Collectors.toList());
+
+        if (palindromes.isEmpty()) {
+            System.out.println("No palindrome found");
+        } else {
+            // Step 2: Find the maximum length among the found palindromes
+            int maxLength = palindromes.stream()
+                    .mapToInt(String::length)
+                    .max()
+                    .orElse(0);
+
+            // Step 3: Collect all palindromes that match the maximum length
+            List<String> longestPalindromes = palindromes.stream()
+                    .filter(p -> p.length() == maxLength)
+                    .collect(Collectors.toList());
+
+            System.out.println("Longest palindrome: " + longestPalindromes);
+        }
+        
+        // Output for the sample list: [racecar]
+    }
+}
