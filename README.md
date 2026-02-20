@@ -1047,3 +1047,21 @@ public class CountOccurrences {
     }
 }
 
+45. identifies how many times each character appears while keeping them in order
+
+public class CharGroup {
+    public static void main(String[] args) {
+        String input = "saurabh";
+
+        Map<Character, Long> counts = input.chars()
+            .mapToObj(c -> (char) c)
+            .collect(Collectors.groupingBy(
+                Function.identity(), 
+                LinkedHashMap::new, 
+                Collectors.counting()
+            ));
+
+        System.out.println(counts);
+        // Output: {s=1, a=2, u=1, r=1, b=1, h=1}
+    }
+}
