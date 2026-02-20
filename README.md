@@ -447,3 +447,48 @@ public class SquareList {
         // First element: apple
     }
 }
+
+20. sum of all elements in a list of integers using the Java 8 Stream API.
+
+    public class SumOfElements {
+    public static void main(String[] args) {
+        // 1. Create a list of integers
+        List<Integer> numbers = Arrays.asList(2, 4, 6, 8, 10);
+
+        // 2. Convert to IntStream and calculate sum
+        int sum = numbers.stream()
+            .mapToInt(Integer::intValue) // Unbox Integer to primitive int
+            .sum();                      // Terminal operation to sum values
+
+        // 3. Print the result
+        System.out.println("Sum: " + sum);
+        
+        // Output:
+        // Sum: 30
+    }
+}
+
+Or
+
+public class SumWithReducer {
+    public static void main(String[] args) {
+        // 1. Create a list of integers
+        List<Integer> numbers = Arrays.asList(2, 4, 6, 8, 10);
+
+        // 2. Calculate sum using reduce
+        // 0 is the identity (starting value)
+        // (a, b) -> a + b is the accumulator (adds each element to the running total)
+        int sum = numbers.stream()
+            .reduce(0, (a, b) -> a + b);
+
+        // Alternatively, using a method reference:
+        // int sum = numbers.stream().reduce(0, Integer::sum);
+
+        // 3. Print the result
+        System.out.println("Sum using Reducer: " + sum);
+        
+        // Output:
+        // Sum using Reducer: 30
+    }
+}
+
