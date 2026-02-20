@@ -408,3 +408,42 @@ public class SquareList {
         // Squared Numbers: [4, 9, 16, 25, 36]
     }
 }
+
+18.  remove duplicate words from a list using the Java 8 Stream API.
+
+    public class RemoveDuplicateWords {
+    public static void main(String[] args) {
+        // 1. Create a list with duplicate words
+        List<String> words = Arrays.asList("apple", "banana", "apple", "orange");
+
+        // 2. Remove duplicates using the distinct() method
+        List<String> uniqueWords = words.stream()
+            .distinct()                    // Keep only unique elements
+            .collect(Collectors.toList()); // Collect into a new list
+
+        // 3. Print the result
+        System.out.println("Unique Words: " + uniqueWords);
+        
+        // Output:
+        // Unique Words: [apple, banana, orange]
+    }
+}
+
+19. first element of a list using the Java 8 Stream API.
+
+    public class FirstElementFinder {
+    public static void main(String[] args) {
+        // 1. Create a list of words
+        List<String> words = Arrays.asList("apple", "banana", "orange", "kiwi");
+
+        // 2. Find the first element using findFirst()
+        // findFirst() returns an Optional to handle empty list cases safely
+        Optional<String> firstWord = words.stream().findFirst();
+
+        // 3. Print the result if it exists
+        firstWord.ifPresent(word -> System.out.println("First element: " + word));
+        
+        // Output:
+        // First element: apple
+    }
+}
