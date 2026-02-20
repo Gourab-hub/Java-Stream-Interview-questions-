@@ -147,3 +147,21 @@ public class Main {
         System.out.println(result);
     }
 }
+
+6. filter even numbers from a list using the Stream API and Lambdas
+
+public class FilterEvenNumbers {
+    public static void main(String[] args) {
+        
+        // 1. Create a list of integers
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 24);
+
+        // 2. Use Stream API to filter even numbers
+        List<Integer> evenNumbers = numbers.stream()
+            .filter(n -> n % 2 == 0)      // Lambda condition for even numbers
+            .collect(Collectors.toList()); // Collect results back into a list
+
+        // 3. Print the result
+        System.out.println("Even Numbers: " + evenNumbers);
+    }
+}
