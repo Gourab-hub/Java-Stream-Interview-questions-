@@ -727,3 +727,25 @@ public class PrimeNumberCollector {
 }
 
 
+32. Sort List of Strings by Length from List using Stream API
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class SortByStringLength {
+    public static void main(String[] args) {
+        // Initializing the list of strings
+        List<String> words = Arrays.asList("apple", "banana", "kiwi", "orange", "grape");
+
+        // Using Java 8 Stream API to sort strings by their length
+        List<String> sortedByLength = words.stream()
+                .sorted((s1, s2) -> Integer.compare(s1.length(), s2.length())) // Custom comparator
+                .collect(Collectors.toList());
+
+        // Printing the result
+        System.out.println("Sorted words by length: " + sortedByLength);
+        
+        // Output: Sorted words by length: [kiwi, apple, grape, orange, banana]
+    }
+}
