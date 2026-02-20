@@ -550,3 +550,45 @@ public class CollectOddNumbersToSet {
         // Output: [1, 3, 5, 7, 9]
     }
 }
+
+24. Check if All Elements in a List are Positive in Java 8 Stream
+
+public class AllPositiveCheck {
+    public static void main(String[] args) {
+        // Initializing the list of integers
+        List<Integer> numbers = Arrays.asList(5, 12, 18, 7, 28, 21);
+
+        // Using Java 8 Stream API to check if all elements are positive
+        boolean allPositive = numbers.stream()
+                .allMatch(n -> n > 0); // Condition to check if number is greater than 0
+
+        // Printing the result
+        System.out.println("All positive? " + allPositive);
+        
+        // Scenario 1 Output: All positive? true
+        
+        // Scenario 2: Changing 12 to -12
+        // List<Integer> numbersWithNegative = Arrays.asList(5, -12, 18, 7, 28, 21);
+        // boolean allPositiveFalse = numbersWithNegative.stream().allMatch(n -> n > 0);
+        // Output for Scenario 2: All positive? false
+    }
+}
+
+25. Skip Elements in Java List with Stream API Java 8
+
+public class SkipFirstThreeElements {
+    public static void main(String[] args) {
+        // Initializing a list of strings
+        List<String> words = Arrays.asList("Apple", "Banana", "Orange", "Grape", "Kiwi");
+
+        // Using Java 8 Stream API to skip the first three elements
+        List<String> newList = words.stream()
+                .skip(3)                   // Skips "Apple", "Banana", and "Orange"
+                .collect(Collectors.toList());
+
+        // Printing the result
+        System.out.println(newList);
+        
+        // Output: [Grape, Kiwi]
+    }
+}
