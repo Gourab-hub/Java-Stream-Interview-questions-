@@ -1898,3 +1898,56 @@ public class Main {
     }
 }
 
+72. for minimum length string inside one single method.
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        String[] words = {"apple", "banana", "cherry", "huckleberry", "fig"};
+
+        findMinimumWays(words);
+    }
+
+    public static void findMinimumWays(String[] words) {
+
+        // 1️⃣ Using min() – Best approach
+        Optional<String> min1 = Arrays.stream(words)
+                .min(Comparator.comparingInt(String::length));
+
+        min1.ifPresent(s -> System.out.println("Using min(): " + s));
+
+
+        // 2️⃣ Using sorted() ascending
+        String min2 = Arrays.stream(words)
+                .sorted(Comparator.comparingInt(String::length))
+                .findFirst()
+                .orElse("");
+
+        System.out.println("Using sorted(): " + min2);
+
+
+        // 3️⃣ Using reduce()
+        String min3 = Arrays.stream(words)
+                .reduce((a, b) -> a.length() <= b.length() ? a : b)
+                .orElse("");
+
+        System.out.println("Using reduce(): " + min3);
+     
+     String smallest = Arrays.stream(words)
+    .sorted((a, b) -> Integer.compare(a.length(), b.length()))
+    .findFirst()
+    .orElse("");
+
+        // 4️⃣ Using simple loop (Interview favorite)
+        String min4 = words[0];
+        for (int i = 1; i < words.length; i++) {
+            if (words[i].length() < min4.length()) {
+                min4 = words[i];
+            }
+        }
+
+        System.out.println("Using loop: " + min4);
+    }
+}
