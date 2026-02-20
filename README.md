@@ -1868,3 +1868,26 @@ Map<String, List<String>> deptToNames =
 
 System.out.println(deptToNames);
 
+
+71. find the longest string in a Java array
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Optional;
+
+public class Main {
+    public static void main(String[] args) {
+        String[] words = {"apple", "banana", "cherry", "huckleberry", "fig"};
+
+        Optional<String> longest = Arrays.stream(words)
+                .max(Comparator.comparingInt(String::length));
+                
+        String longest = Arrays.stream(words)
+        .sorted((a, b) -> Integer.compare(b.length(), a.length()))
+        .findFirst()
+        .orElse("");
+        
+        longest.ifPresent(s -> System.out.println("Largest string: " + s));
+    }
+}
+
