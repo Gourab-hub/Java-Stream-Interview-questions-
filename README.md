@@ -259,7 +259,7 @@ public class FindDuplicates {
 
         // 3. Filter the stream for duplicates
         List<Integer> duplicates = numbers.stream()
-            .filter(n -> !seen.add(n)) // If add returns false, it's a duplicate
+            .filter(n -> !seen.add(n) na) // If add returns false, it's a duplicate
             .distinct()               // Ensure each duplicate is only listed once
             .collect(Collectors.toList());
 
@@ -271,3 +271,54 @@ public class FindDuplicates {
     }
 }
 
+12.  remove null values from a list of strings using the Java 8 Stream API.
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class RemoveNullValues {
+    public static void main(String[] args) {
+        // 1. Create a list containing strings and null values
+        List<String> words = Arrays.asList("Apple", null, "Banana", null, "Grape", "Kiwi", null);
+
+        // 2. Filter out null values using Stream API
+        List<String> nonNullWords = words.stream()
+            .filter(word -> word != null) // Keep only non-null elements
+            .collect(Collectors.toList());
+
+        // 3. Print the result
+        System.out.println("List after removing nulls: " + nonNullWords);
+        
+        // Output: // List after removing nulls: [Apple, Banana, Grape, Kiwi]
+    }
+}
+
+13. flatten a list of lists into a single list of integers using the Java 8 Stream API.
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FlattenList {
+    public static void main(String[] args) {
+        // 1. Create individual lists
+        List<Integer> list1 = Arrays.asList(1, 2, 3);
+        List<Integer> list2 = Arrays.asList(4, 5, 6);
+        List<Integer> list3 = Arrays.asList(7, 8, 9);
+
+        // 2. Create a list of lists
+        List<List<Integer>> listOfLists = Arrays.asList(list1, list2, list3);
+
+        // 3. Flatten the list of lists using flatMap
+        List<Integer> flattenedList = listOfLists.stream()
+            .flatMap(List::stream)         // Flatten inner lists into a single stream
+            .collect(Collectors.toList()); // Collect results into one list
+
+        // 4. Print the result
+        System.out.println("Flattened List: " + flattenedList);
+        
+        // Output:
+        // Flattened List: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    }
+}
