@@ -1886,6 +1886,13 @@ public class Main {
         .sorted((a, b) -> Integer.compare(b.length(), a.length()))
         .findFirst()
         .orElse("");
+
+        Optional<String> longest = Arrays.stream(words)
+        .sorted(Comparator.comparingInt(String::length).reversed()) // Largest to smallest
+        .findFirst();
+
+// Output: hippopotamus
+
         
         longest.ifPresent(s -> System.out.println("Largest string: " + s));
     }
