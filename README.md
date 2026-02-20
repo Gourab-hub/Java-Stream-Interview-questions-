@@ -347,3 +347,24 @@ public class PartitionByEvenOdd {
         // Odd List: [1, 3, 5, 7, 9]
     }
 }
+
+15. frequency of elements (the number of times each word appears) in a list using the Java 8 Stream API.
+
+public class WordFrequency {
+    public static void main(String[] args) {
+        // 1. Create a list of words with repetitions
+        List<String> words = Arrays.asList("apple", "banana", "apple", "orange", "banana", "banana");
+
+        // 2. Create a frequency map using Stream API
+        Map<String, Long> frequencyMap = words.stream()
+            .collect(Collectors.groupingBy(
+                word -> word,           // Group by the word itself
+                Collectors.counting()    // Count occurrences in each group
+            ));
+
+        // 3. Print the resulting map
+        System.out.println("Element Frequencies: " + frequencyMap);
+        
+        // Output: // Element Frequencies: {orange=1, banana=3, apple=2}
+    }
+}
