@@ -749,3 +749,21 @@ public class SortByStringLength {
         // Output: Sorted words by length: [kiwi, apple, grape, orange, banana]
     }
 }
+
+33. Calculate Product of All Elements in List using Stream API
+
+public class ProductOfList {
+    public static void main(String[] args) {
+        // Initializing the list of integers
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        // Using Java 8 Stream API to calculate the product of all elements
+        int product = numbers.stream()
+                .reduce(1, (a, b) -> a * b); // Initial value 1, then multiplying a * b
+
+        // Printing the result
+        System.out.println("Product: " + product);
+        
+        // Output: Product: 120
+    }
+}
