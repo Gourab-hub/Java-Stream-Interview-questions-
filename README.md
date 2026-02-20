@@ -1527,3 +1527,94 @@ public class NumbersStartingWithOne {
         // 15
     }
 }
+
+65. Sum and Sort Transactions by Date in Java 8 Streams API
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class TransactionByDate {
+    public static void main(String[] args) {
+        // List of transactions (Date, Amount)
+        List<TransactionRecord> transactions = Arrays.asList(
+            new TransactionRecord("2024-12-23", 100),
+            new TransactionRecord("2024-12-24", 200),
+            new TransactionRecord("2024-12-25", 300),
+            new TransactionRecord("2024-12-24", 400),
+            new TransactionRecord("2024-12-25", 500)
+        );
+
+        // Step 1: Group by date and sum the amounts
+        Map<String, Integer> sumByDate = transactions.stream()
+                .collect(Collectors.groupingBy(
+                        TransactionRecord::getDate,
+                        Collectors.summingInt(TransactionRecord::getAmount)
+                ));
+
+        // Step 2: Sort the results by date and print
+        System.out.println("Date\t\tAmount");
+        sumByDate.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry -> System.out.println(entry.getKey() + "\t" + entry.getValue()));
+    }
+}
+
+// Custom class for transaction records
+class TransactionRecord {
+    private String date;
+    private int amount;
+
+    public TransactionRecord(String date, int amount) {
+        this.date = date;
+        this.amount = amount;
+    }
+
+    public String getDate() { return date; }
+    public int getAmount() { return amount; }
+}
+
+66. Find Employees by Department using the Java 8 Streams API
+
+
+public class FindEmployeeByDepartment {
+    public static void main(String[] args) {
+        // Step 1: Initialize a list of employees
+        List<Employee> employeeList = Arrays.asList(
+            new Employee("Saurabh", "IT"),
+            new Employee("Shubham", "HR"),
+            new Employee("Sony", "IT"),
+            new Employee("Rahul", "HR")
+        );
+
+        // Step 2: Use Stream API to filter by department (e.g., "IT")
+        List<Employee> itEmployees = employeeList.stream()
+                .filter(e -> "IT".equals(e.getDepartment())) // Filter by department name
+                .collect(Collectors.toList());               // Collect results into a list
+
+        // Step 3: Print the results
+        itEmployees.forEach(System.out::println);
+        
+        /* Output for "IT":
+        Employee{name='Saurabh', department='IT'}
+        Employee{name='Sony', department='IT'}
+        */
+    }
+}
+
+// Custom Employee class
+class Employee {
+    private String name;
+    private String department;
+
+    public Employee(String name, String department) {
+        this.name = name;
+        this.department = department;
+    }
+
+    public String getDepartment() { return department; }
+
+    @Override
+    public String toString() {
+        return "Employee{name='" + name + "', department='" + department + "'}";
+    }
+}
