@@ -767,3 +767,43 @@ public class ProductOfList {
         // Output: Product: 120
     }
 }
+
+
+34. Find the Second smallest element in a list using Stream API
+
+public class SecondSmallest {
+    public static void main(String[] args) {
+        // Initializing the list of integers
+        List<Integer> numbers = Arrays.asList(3, 7, 2, 5, 9, 1, 6);
+
+        // Using Java 8 Stream API to find the second smallest element
+        Optional<Integer> secondSmallest = numbers.stream()
+                .sorted()             // Step 1: Sort in ascending order (default)
+                .skip(1)              // Step 2: Skip the first (smallest) element
+                .findFirst();         // Step 3: Get the next element
+
+        // Printing the result if present
+        secondSmallest.ifPresent(System.out::println);
+        
+        // Output: 2
+    }
+}
+
+35. Find Palindromic Strings in a List using Stream API
+
+public class PalindromicString {
+    public static void main(String[] args) {
+        // Initializing the list of strings
+        List<String> words = Arrays.asList("madam", "apple", "racecar", "banana", "level");
+
+        // Using Java 8 Stream API to filter palindromic strings
+        List<String> palindromes = words.stream()
+                .filter(word -> word.equals(new StringBuilder(word).reverse().toString()))
+                .collect(Collectors.toList());
+
+        // Printing the result
+        System.out.println("Palindromic words: " + palindromes);
+        
+        // Output: Palindromic words: [madam, racecar, level]
+    }
+}
