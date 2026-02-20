@@ -1618,3 +1618,153 @@ class Employee {
         return "Employee{name='" + name + "', department='" + department + "'}";
     }
 }
+
+
+67. Find the Total Salary by Department using Java 8 Stream API
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class TotalSalaryByDepartment {
+    public static void main(String[] args) {
+        // Step 1: Initialize a list of employees
+        List<Employee> employeeList = Arrays.asList(
+            new Employee("Rajesh Kumar", "IT", 60000.0),
+            new Employee("Suresh", "IT", 65000.0),
+            new Employee("Mahesh", "HR", 55000.0),
+            new Employee("Ramesh", "HR", 45000.0),
+            new Employee("Ganesh", "Finance", 70000.0)
+        );
+
+        // Step 2: Use Stream API to group by department and sum salaries
+        Map<String, Double> totalSalaryByDept = employeeList.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::getDepartment,            // Key: Department Name
+                        Collectors.summingDouble(Employee::getSalary) // Value: Sum of Salaries
+                ));
+
+        // Step 3: Print the results
+        totalSalaryByDept.forEach((dept, salary) -> {
+            System.out.println(dept + ": " + salary);
+        });
+
+        /*
+        Expected Output:
+        Finance: 70000.0
+        HR: 100000.0
+        IT: 125000.0
+        */
+    }
+}
+
+// Custom Employee class
+class Employee {
+    private String name;
+    private String department;
+    private double salary;
+
+    public Employee(String name, String department, double salary) {
+        this.name = name;
+        this.department = department;
+        this.salary = salary;
+    }
+
+    public String getDepartment() { return department; }
+    public double getSalary() { return salary; }
+}
+68. Find Highest Salary Employee in Java 8 Streams API
+
+import java.util.*;
+
+public class FindHighestSalary {
+    public static void main(String[] args) {
+        // Step 1: Initialize a list of employees
+        List<Employee> employeeList = Arrays.asList(
+            new Employee("Rahul Sharma", 50000),
+            new Employee("Subham Varma", 82000),
+            new Employee("Vikas Gupta", 56000),
+            new Employee("Priya Singh", 90000)
+        );
+
+        // Step 2: Use Stream API to find the employee with the highest salary
+        Employee highestPaid = employeeList.stream()
+                .max(Comparator.comparingDouble(Employee::getSalary)) // Compare by salary
+                .orElseThrow(() -> new RuntimeException("No employee found")); // Handle empty list
+
+        // Step 3: Print the result
+        System.out.println("Highest paid employee: " + highestPaid);
+        
+        // Output for the sample data: Employee{name='Priya Singh', salary=90000}
+    }
+}
+
+// Custom Employee class
+class Employee {
+    private String name;
+    private double salary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public double getSalary() { return salary; }
+
+    @Override
+    public String toString() {
+        return "Employee{name='" + name + "', salary=" + salary + "}";
+    }
+}
+69. Find Top 3 Highest Paid Employees in IT Department using Java
+
+
+public class TopPaidEmployees {
+    public static void main(String[] args) {
+        // Step 1: Initialize list of employees
+        List<Employee> employeeList = Arrays.asList(
+            new Employee("Rajesh", "IT", 150000),
+            new Employee("Suresh", "HR", 120000),
+            new Employee("Mahesh", "IT", 200000),
+            new Employee("Gaurav", "IT", 250000),
+            new Employee("Amit", "IT", 180000)
+        );
+
+        // Step 2: Use Stream API to filter, sort, and limit
+        List<Employee> top3IT = employeeList.stream()
+                .filter(e -> "IT".equals(e.getDepartmentName())) // Filter by department
+                .sorted(Comparator.comparingDouble(Employee::getSalary).reversed()) // Sort descending
+                .limit(3)                                        // Take only the top 3
+                .collect(Collectors.toList());
+
+        // Step 3: Print results
+        top3IT.forEach(System.out::println);
+        
+        /* Output:
+        Employee{name='Gaurav', dept='IT', salary=250000.0}
+        Employee{name='Mahesh', dept='IT', salary=200000.0}
+        Employee{name='Amit', dept='IT', salary=180000.0}
+        */
+    }
+}
+
+// Custom Employee class
+class Employee {
+    private String name;
+    private String departmentName;
+    private double salary;
+
+    public Employee(String name, String departmentName, double salary) {
+        this.name = name;
+        this.departmentName = departmentName;
+        this.salary = salary;
+    }
+
+    public String getDepartmentName() { return departmentName; }
+    public double getSalary() { return salary; }
+
+    @Override
+    public String toString() {
+        return "Employee{name='" + name + "', dept='" + departmentName + "', salary=" + salary + "}";
+    }
+}
+
