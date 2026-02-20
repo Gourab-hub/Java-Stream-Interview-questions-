@@ -972,3 +972,51 @@ public class CountCharacters {
         // Output for ["apple", "banana", "orange", "grape"]: 22
     }
 }
+
+
+43. Find the First Non Repeated Character in String using Streams
+
+public class FirstNonRepeatedCharacter {
+    public static void main(String[] args) {
+        String input = "saurabh"; // Sample input
+
+        // Step 1: Count character occurrences while preserving order using LinkedHashMap
+        Map<Character, Integer> characterCount = new LinkedHashMap<>();
+        for (char c : input.toCharArray()) {
+            characterCount.put(c, characterCount.getOrDefault(c, 0) + 1);
+        }
+
+        // Step 2: Use Stream API to find the first character with a count of 1
+        characterCount.entrySet().stream()
+                .filter(entry -> entry.getValue() == 1) // Keep only non-repeated characters
+                .map(Map.Entry::getKey)                 // Extract the character
+                .findFirst()                           // Get the first one in the map
+                .ifPresent(System.out::println);       // Print the result
+
+        // Output for "saurabh": s
+    }
+}
+
+
+or 
+
+public class FirstNonRepeatedCharacter {
+    public static void main(String[] args) {
+        String input = "saurabh";
+
+        input.chars() // Returns an IntStream of characters
+            .mapToObj(c -> (char) c) // Convert int to Character
+            .collect(Collectors.groupingBy(
+                Function.identity(), 
+                LinkedHashMap::new, // Maintains insertion order
+                Collectors.counting()
+            ))
+            .entrySet().stream()
+            .filter(entry -> entry.getValue() == 1)
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .ifPresent(System.out::println);
+            
+        // Output: s
+    }
+}
