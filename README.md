@@ -1406,3 +1406,36 @@ public class FindAverageLength {
         // apple (5) + banana (6) + kiwi (4) = 15. Total words = 3. 15 / 3 = 5.0
     }
 }
+
+60. Find the Most Frequent Element in List using Java 8
+
+public class MostFrequentElement {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 2, 1, 3);
+
+        // Validation for empty list
+        if (numbers.isEmpty()) {
+            System.out.println("The list is empty; no frequent element to find.");
+            return;
+        }
+
+        // Step 1: Create a frequency map {element -> count}
+        Map<Integer, Long> frequencyMap = numbers.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        // Step 2: Find the maximum frequency value
+        long maxFrequency = frequencyMap.values().stream()
+                .max(Long::compare)
+                .orElse(0L);
+
+        // Step 3: Collect all elements that have the maximum frequency
+        List<Integer> mostFrequent = frequencyMap.entrySet().stream()
+                .filter(entry -> entry.getValue() == maxFrequency)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+        System.out.println("Most frequent element(s): " + mostFrequent);
+        
+        // Output for [1, 2, 3, 2, 1, 3]: [1, 2, 3] (since all appear twice)
+    }
+}
