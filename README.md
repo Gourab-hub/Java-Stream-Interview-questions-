@@ -202,3 +202,44 @@ public class ConvertToUppercase {
         // maxValue.ifPresent(max -> System.out.println("Max is: " + max));
     }
 }
+
+9. group a list of strings by their character length using the Java 8 Stream API
+
+public class GroupByStringLength {
+    public static void main(String[] args) {
+        // 1. Create a list of strings
+        List<String> words = Arrays.asList("Apple", "Banana", "Pear", "Grape", "Kiwi", "Orange");
+
+        // 2. Group strings by their length using Stream API
+        Map<Integer, List<String>> groupedByLength = words.stream()
+            .collect(Collectors.groupingBy(String::length));
+
+        // 3. Print the resulting map
+        System.out.println(groupedByLength);
+        // Output:
+        // {4=[Pear, Kiwi], 5=[Apple, Grape], 6=[Banana, Orange]}
+        
+    }
+}
+
+10. filter a list of strings to find words starting with the letter 'A' (both uppercase and lowercase) using the Java 8 Stream API.
+
+public static void main(String[] args) {
+        // 1. Create a list of words
+        List<String> words = Arrays.asList("Amit", "Saurav", "Animesh", "Vikram", "Apple", "Banana", "Kiwi");
+
+        // 2. Filter words starting with 'A' or 'a'
+        List<String> startingWithA = words.stream()
+            .filter(s -> s.startsWith("A") || s.startsWith("a"))
+            .collect(Collectors.toList());
+
+        // 3. Print the result using if-else logic
+        if (!startingWithA.isEmpty()) {
+            System.out.println("Words starting with A or a: " + startingWithA);
+        } else {
+            System.out.println("No words starting with A or a found.");
+        }
+        
+        // Output:
+        // Words starting with A or a: [Amit, Animesh, Apple]
+    }
