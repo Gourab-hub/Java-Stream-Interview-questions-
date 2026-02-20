@@ -633,3 +633,43 @@ public class FindMinimum {
         // Output: Minimum number is: 5
     }
 }
+
+
+28. Find Average Of Integer from List using the Java 8 Stream API
+
+public class AverageOfList {
+    public static void main(String[] args) {
+        // Initializing the list of integers
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        // Using Java 8 Stream API to calculate the average
+        double average = numbers.stream()
+                .mapToInt(Integer::intValue) // Unboxing Integer to int
+                .average()                   // Calculating the average
+                .orElse(0.0);                // Default value if list is empty
+
+        // Printing the result
+        System.out.println("Average: " + average);
+        
+        // Output: Average: 3.5
+    }
+}
+
+29. Filter Strings Containing a Specific Character from List
+
+public class FilterStringsByCharacter {
+    public static void main(String[] args) {
+        // Initializing the list of strings
+        List<String> words = Arrays.asList("apple", "banana", "grape", "kiwi", "orange");
+
+        // Using Java 8 Stream API to filter words containing the character 'a'
+        List<String> filteredWords = words.stream()
+                .filter(word -> word.contains("a")) // Logic: check if word contains 'a'
+                .collect(Collectors.toList());      // Collect results into a new list
+
+        // Printing the result
+        System.out.println(filteredWords);
+        
+        // Output with 'a': [apple, banana, grape, orange]
+    }
+}
