@@ -934,3 +934,41 @@ public class AllSubsets {
         // Output for [1, 2, 3]: [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
     }
 }
+
+
+41. Reverse a List of Strings using Stream API
+
+public class ReverseListStream {
+    public static void main(String[] args) {
+        List<String> words = Arrays.asList("apple", "banana", "orange", "grape", "kiwi");
+
+        // Stream API logic to reverse the list
+        List<String> reverseWords = words.stream()
+                .collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
+                    Collections.reverse(list);
+                    return list;
+                }));
+
+        System.out.println("Reversed (Stream): " + reverseWords);
+        // Output: [kiwi, grape, orange, banana, apple]
+    }
+}
+
+42. Count Number of Characters in a List of Strings using Stream
+
+public class CountCharacters {
+    public static void main(String[] args) {
+        // Initializing the list of strings
+        List<String> words = Arrays.asList("apple", "banana", "orange", "grape");
+
+        // Using Java 8 Stream API to count total characters
+        int totalCharacters = words.stream()
+                .mapToInt(String::length) // Convert each string to its length (int)
+                .sum();                   // Sum all lengths
+
+        // Printing the result
+        System.out.println("Total number of characters: " + totalCharacters);
+        
+        // Output for ["apple", "banana", "orange", "grape"]: 22
+    }
+}
