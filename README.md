@@ -1241,3 +1241,43 @@ public class SortByLastChar {
     }
 }
 
+
+54. Find Difference Between Two Lists using Java 8 Streams API
+
+public class FindListDifference {
+    public static void main(String[] args) {
+        // Sample input lists
+        List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> list2 = Arrays.asList(3, 4, 5, 6, 7);
+
+        // Finding the difference (elements in list1 but not in list2)
+        List<Integer> difference = list1.stream()
+                .filter(n -> !list2.contains(n)) // Keep if NOT in list2
+                .collect(Collectors.toList());
+
+        // Result output
+        System.out.println("Difference value: " + difference);
+        
+        // Output for [1, 2, 3, 4, 5] and [3, 4, 5, 6, 7]: [1, 2]
+    }
+}
+
+
+55. Reverse the Characters of Each String in a List using Java 8
+
+public class ReverseCharacters {
+    public static void main(String[] args) {
+        // Sample input list
+        List<String> words = Arrays.asList("apple", "banana", "cherry");
+
+        // Using Stream API to reverse each string
+        List<String> reversedWords = words.stream()
+                .map(word -> new StringBuilder(word).reverse().toString())
+                .collect(Collectors.toList());
+
+        // Printing the result
+        System.out.println("Reverse word: " + reversedWords);
+        
+        // Output for ["apple", "banana", "cherry"]: [elppa, ananab, yrrehc]
+    }
+}
