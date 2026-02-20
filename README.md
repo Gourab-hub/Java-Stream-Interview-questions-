@@ -1360,3 +1360,28 @@ public class LongestPalindrome {
         // Output for the sample list: [racecar]
     }
 }
+
+
+58. Calculate Factorials of a List of Numbers using Java 8 Stream
+
+public class CalculateFactorial {
+    public static void main(String[] args) {
+        // Sample input list
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        // Using Stream API to map each number to its factorial
+        List<Integer> factorials = numbers.stream()
+                .map(CalculateFactorial::factorial) // Method reference to the recursive method
+                .collect(Collectors.toList());
+
+        // Printing the result
+        System.out.println("Factorials: " + factorials);
+        
+        // Output: [1, 2, 6, 24, 120, 720]
+    }
+
+    // Recursive method to calculate factorial of a number
+    private static int factorial(int n) {
+        return (n == 0) ? 1 : n * factorial(n - 1);
+    }
+}
