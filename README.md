@@ -165,3 +165,40 @@ public class FilterEvenNumbers {
         System.out.println("Even Numbers: " + evenNumbers);
     }
 }
+
+7. convert a list of strings to uppercase using the Java 8 Stream API
+
+public class ConvertToUppercase {
+    public static void main(String[] args) {
+        // Create the initial list
+        List<String> words = Arrays.asList("Java", "spring", "Oracle");
+
+        // Convert each string to uppercase using Stream API
+        List<String> upperWords = words.stream()
+            .map(String::toUpperCase)     // Transformation step
+            .collect(Collectors.toList()); // Collection step
+
+        // Print the result
+        System.out.println(upperWords); // Output: [JAVA, SPRING, ORACLE]
+    }
+}
+
+8. maximum value in a list of integers using the Java 8 Stream API.
+
+   public class MaxValueFinder {
+    public static void main(String[] args) {
+        // 1. Initialize the list
+        List<Integer> numbers = Arrays.asList(10, 50, 30, 45, 88);
+
+        // 2. Find max value using Stream API
+        Optional<Integer> maxValue = numbers.stream()
+            .max(Integer::compareTo); // Compare elements to find the largest
+
+        // 3. Print the result
+        // The Optional will print as Optional[88]
+        System.out.println("Maximum Value: " + maxValue);
+        
+        // To get just the number, you can use:
+        // maxValue.ifPresent(max -> System.out.println("Max is: " + max));
+    }
+}
