@@ -243,3 +243,31 @@ public static void main(String[] args) {
         // Output:
         // Words starting with A or a: [Amit, Animesh, Apple]
     }
+
+11. find duplicate elements in a list using the Java 8 Stream API.
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class FindDuplicates {
+    public static void main(String[] args) {
+        // 1. Create a list with duplicate numbers
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 3, 4, 7, 8, 6);
+
+        // 2. Use a Set to track seen elements
+        Set<Integer> seen = new HashSet<>();
+
+        // 3. Filter the stream for duplicates
+        List<Integer> duplicates = numbers.stream()
+            .filter(n -> !seen.add(n)) // If add returns false, it's a duplicate
+            .distinct()               // Ensure each duplicate is only listed once
+            .collect(Collectors.toList());
+
+        // 4. Print the result
+        System.out.println("Duplicate Elements: " + duplicates);
+        
+        // Output:
+        // Duplicate Elements: [3, 4, 6]
+    }
+}
+
