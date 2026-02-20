@@ -1385,3 +1385,24 @@ public class CalculateFactorial {
         return (n == 0) ? 1 : n * factorial(n - 1);
     }
 }
+
+59. Find the Average Length of Strings in List in Java 8 Streams
+
+public class FindAverageLength {
+    public static void main(String[] args) {
+        // Sample input list
+        List<String> words = Arrays.asList("apple", "banana", "kiwi");
+
+        // Using Stream API to find the average string length
+        double averageLength = words.stream()
+                .mapToInt(String::length) // Convert words to their lengths (IntStream)
+                .average()                // Calculate the average
+                .orElse(0.0);             // Default to 0.0 if the list is empty
+
+        // Printing the result
+        System.out.println("Average string length: " + averageLength);
+        
+        // Output for ["apple", "banana", "kiwi"]: 5.0
+        // apple (5) + banana (6) + kiwi (4) = 15. Total words = 3. 15 / 3 = 5.0
+    }
+}
