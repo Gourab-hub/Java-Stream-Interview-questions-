@@ -807,3 +807,55 @@ public class PalindromicString {
         // Output: Palindromic words: [madam, racecar, level]
     }
 }
+
+36. Convert a List of Strings to a Set using Stream API in java 8
+
+public class ConvertListToSet {
+    public static void main(String[] args) {
+        // Initializing a list of strings with duplicate elements
+        List<String> words = Arrays.asList("apple", "banana", "grape", "orange", "banana");
+
+        // Approach 1: Using the HashSet Constructor (as shown in the video)
+        Set<String> wordSet = new HashSet<>(words);
+
+        // Approach 2: Using Java 8 Stream API (Alternative for similar tasks)
+        // Set<String> wordSetStream = words.stream().collect(Collectors.toSet());
+
+        // Printing the result
+        System.out.println("Word Set: " + wordSet);
+        
+        // Output: [banana, orange, apple, grape] (Order may vary)
+    }
+}
+
+37. Find the Median Value in a List of Integers using Stream API
+
+public class MedianValue {
+    public static void main(String[] args) {
+        // Initializing the list of integers
+        List<Integer> numbers = Arrays.asList(1, 3, 5, 7, 9);
+
+        // Step 1: Sort the numbers in ascending order using Stream API
+        List<Integer> sortedNumbers = numbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
+
+        int size = sortedNumbers.size();
+        double median;
+
+        // Step 2: Calculate median based on whether the size is even or odd
+        if (size % 2 == 0) {
+            // Even size: Average of the two middle elements
+            median = (sortedNumbers.get(size / 2 - 1) + sortedNumbers.get(size / 2)) / 2.0;
+        } else {
+            // Odd size: The middle element
+            median = sortedNumbers.get(size / 2);
+        }
+
+        // Printing the result
+        System.out.println("Median: " + median);
+        
+        // Output for [1, 3, 5, 7, 9]: Median: 5.0
+        // Output for [1, 3, 5, 7, 9, 11]: Median: 6.0
+    }
+}
