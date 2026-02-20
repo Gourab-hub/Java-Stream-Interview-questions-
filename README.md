@@ -1439,3 +1439,46 @@ public class MostFrequentElement {
         // Output for [1, 2, 3, 2, 1, 3]: [1, 2, 3] (since all appear twice)
     }
 }
+
+61. Count the Number of Digits in a String in Java 8 Streams API
+
+public class CountStringDigits {
+    public static void main(String[] args) {
+        String str = "hello 123";
+
+        // Using Stream API to count digits
+        long digitCount = str.chars()            // Returns an IntStream of character codes
+                .filter(Character::isDigit)      // Filters for characters that are digits
+                .count();                        // Returns the total count
+
+        // Printing the result
+        System.out.println("Digit count: " + digitCount);
+        
+        // Output for "hello 123": 3
+    }
+}
+
+62.Create a Map from Two Lists using Java 8 Stream API
+
+public class CreateMapFromTwoLists {
+    public static void main(String[] args) {
+        // List 1: Keys
+        List<String> keys = Arrays.asList("a", "b", "c");
+        
+        // List 2: Values
+        List<Integer> values = Arrays.asList(1, 2, 3);
+
+        // Creating a map using Stream API
+        Map<String, Integer> map = keys.stream()
+                .collect(Collectors.toMap(
+                        key -> key,                                // Key mapper
+                        key -> values.get(keys.indexOf(key))        // Value mapper using index
+                ));
+
+        // Printing the result
+        System.out.println("Created map: " + map);
+        
+        // Output: {a=1, b=2, c=3}
+    }
+}
+
