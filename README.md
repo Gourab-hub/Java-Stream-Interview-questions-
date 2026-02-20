@@ -1768,3 +1768,103 @@ class Employee {
     }
 }
 
+70. Java stream employee class  example using group by
+
+Employee class
+
+class Employee {
+    private int id;
+    private String name;
+    private String department;
+    private double salary;
+
+    public Employee(int id, String name, String department, double salary) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.salary = salary;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+}
+Sample data
+
+List<Employee> employees = Arrays.asList(
+        new Employee(1, "Amit", "IT", 60000),
+        new Employee(2, "Rohit", "HR", 45000),
+        new Employee(3, "Neha", "IT", 70000),
+        new Employee(4, "Priya", "Finance", 50000),
+        new Employee(5, "Ankit", "HR", 48000)
+);
+
+1. Group employees by department
+
+Map<String, List<Employee>> empByDept =
+        employees.stream()
+                 .collect(Collectors.groupingBy(Employee::getDepartment));
+
+empByDept.forEach((dept, empList) -> {
+    System.out.println(dept);
+    empList.forEach(e -> System.out.println("  " + e.getName()));
+});
+
+2. Count employees in each department
+
+Map<String, Long> countByDept =
+        employees.stream()
+                 .collect(Collectors.groupingBy(
+                         Employee::getDepartment,
+                         Collectors.counting()
+                 ));
+
+System.out.println(countByDept);
+
+3. Average salary per department
+
+Map<String, Double> avgSalaryByDept =
+        employees.stream()
+                 .collect(Collectors.groupingBy(
+                         Employee::getDepartment,
+                         Collectors.averagingDouble(Employee::getSalary)
+                 ));
+
+System.out.println(avgSalaryByDept);
+
+4. Highest paid employee in each department
+
+Map<String, Optional<Employee>> highestPaidByDept =
+        employees.stream()
+                 .collect(Collectors.groupingBy(
+                         Employee::getDepartment,
+                         Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))
+                 ));
+
+highestPaidByDept.forEach((dept, emp) ->
+        System.out.println(dept + " -> " + emp.get().getName())
+);
+
+5. Group department → employee names only
+
+Map<String, List<String>> deptToNames =
+        employees.stream()
+                 .collect(Collectors.groupingBy(
+                         Employee::getDepartment,
+                         Collectors.mapping(Employee::getName, Collectors.toList())
+                 ));
+
+System.out.println(deptToNames);
+
