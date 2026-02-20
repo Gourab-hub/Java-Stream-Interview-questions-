@@ -1482,3 +1482,48 @@ public class CreateMapFromTwoLists {
     }
 }
 
+63. Group strings by their length using the Java 8 Streams API
+
+
+public class GroupByLength {
+    public static void main(String[] args) {
+        // Sample input list
+        List<String> words = Arrays.asList("apple", "bat", "cat", "banana", "crab");
+
+        // Using Stream API to group strings by length
+        Map<Integer, List<String>> groupedByLength = words.stream()
+                .collect(Collectors.groupingBy(String::length)); // Grouping by string length
+
+        // Printing the result using forEach
+        groupedByLength.forEach((length, group) -> {
+            System.out.println(length + ": " + group);
+        });
+
+        /*
+        Expected Output:
+        3: [bat, cat]
+        5: [apple, crab]
+        6: [banana]
+        */
+    }
+}
+
+64. Find Numbers Starting with 1 in Java 8 Stream API
+
+
+public class NumbersStartingWithOne {
+    public static void main(String[] args) {
+        // Sample input list
+        List<Integer> numbers = Arrays.asList(10, 15, 8, 49, 25, 98, 32);
+
+        // Using Stream API to find numbers starting with '1'
+        numbers.stream()
+                .map(s -> s + "")             // Convert each integer to a String
+                .filter(s -> s.startsWith("1")) // Filter strings that start with "1"
+                .forEach(System.out::println);  // Print each matching result
+
+        // Output for the sample list:
+        // 10
+        // 15
+    }
+}
