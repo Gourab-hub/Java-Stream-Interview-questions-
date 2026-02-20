@@ -1951,3 +1951,29 @@ public class Main {
         System.out.println("Using loop: " + min4);
     }
 }
+
+73. Here are all the getter methods available in the IntSummaryStatistics
+
+import java.util.Arrays;
+import java.util.IntSummaryStatistics;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] numbers = {10, 20, 30, 40, 50};
+
+        // Create the statistics object
+        IntSummaryStatistics stats = Arrays.stream(numbers).summaryStatistics();
+
+        // Access all the "get" methods
+        System.out.println("Total Count: " + stats.getCount());   // 5
+        System.out.println("Total Sum:   " + stats.getSum());     // 150
+        System.out.println("Minimum:     " + stats.getMin());     // 10
+        System.out.println("Maximum:     " + stats.getMax());     // 50
+        System.out.println("Average:     " + stats.getAverage()); // 30.0
+        
+        // Bonus: String representation of all stats
+        System.out.println("\nAll stats at once: " + stats.toString());
+    }
+}
+
+
