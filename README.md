@@ -1020,3 +1020,30 @@ public class FirstNonRepeatedCharacter {
         // Output: s
     }
 }
+
+44. Count Occurrences of Each Element in a List using Streams API
+
+public class CountOccurrences {
+    public static void main(String[] args) {
+        // Initializing the list with repeating strings
+        List<String> words = Arrays.asList("apple", "banana", "apple", "grape", "banana", "orange", "banana");
+
+        // Approach 1: Resulting in a Map<String, Long>
+        Map<String, Long> occurrencesLong = words.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        // Approach 2: Resulting in a Map<String, Integer> using collectingAndThen
+        Map<String, Integer> occurrencesInt = words.stream()
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.collectingAndThen(Collectors.counting(), Long::intValue)
+                ));
+
+        // Printing results
+        System.out.println("Occurrences (Long): " + occurrencesLong);
+        System.out.println("Occurrences (Integer): " + occurrencesInt);
+        
+        // Output: {orange=1, banana=3, apple=2, grape=1}
+    }
+}
+
