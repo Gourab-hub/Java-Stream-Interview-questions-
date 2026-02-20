@@ -491,6 +491,7 @@ public class SumWithReducer {
         // Sum using Reducer: 30
     }
 }
+
 21. Java 8 Stream API Interview Questions: Find Longest String in List Java 8 Stream API
 
 public class LongestStringLengt {
@@ -528,5 +529,24 @@ public class SecondHighestElement {
         secondHighestNum.ifPresent(System.out::println);
         
         // Output: 15
+    }
+}
+
+23. Java 8 Stream API Interview Questions: Collect Odd Numbers into Set Using Java 8 Stream API
+
+public class CollectOddNumbersToSet {
+    public static void main(String[] args) {
+        // Initializing a list of integers
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        // Using Java 8 Stream API to filter odd numbers and collect them into a Set
+        Set<Integer> oddNumbers = numbers.stream()
+                .filter(n -> n % 2 != 0)     // Filter condition for odd numbers
+                .collect(Collectors.toSet()); // Collecting the result into a Set
+
+        // Printing the result
+        System.out.println(oddNumbers);
+        
+        // Output: [1, 3, 5, 7, 9]
     }
 }
