@@ -126,9 +126,24 @@ public class Main {
 
 5. Reverse Order
 
-List<Integer> result =
-        Arrays.stream(arr)
-              .boxed()
-              .distinct()
-              .sorted(Comparator.reverseOrder())
-              .collect(Collectors.toList());
+
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        int[] arr = {5, 3, 1, 2, 3, 5, 4, 2};
+
+        List<Integer> result =
+                Arrays.stream(arr)          // IntStream
+                      .boxed()              // convert int -> Integer
+                      .distinct()           // remove duplicates
+                      .sorted(Comparator.reverseOrder()) // sort descending
+                      .collect(Collectors.toList());
+
+        System.out.println("Reverse Sorted Distinct Numbers:");
+        System.out.println(result);
+    }
+}
