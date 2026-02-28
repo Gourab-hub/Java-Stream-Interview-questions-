@@ -1976,4 +1976,33 @@ public class Main {
     }
 }
 
+74. Given a string of words, separate the words into two categories: Palindromes and Non-Palindromes. Within each category, the words should be sorted by their length in ascending order.
+
+Example Input: "hi oo how are your level comes"
+{Non-Palindromes=[hi, how, are, your, comes], Palindromes=[oo, level]}
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class PalindromeSort {
+    public static void main(String[] args) {
+        String input = "hi oo how are your level comes";
+
+        Map<String, List<String>> result = Arrays.stream(input.split(" "))
+            .collect(Collectors.groupingBy(
+                // Classifier: Checks if word is a palindrome
+                word -> word.equals(new StringBuilder(word).reverse().toString()) 
+                        ? "Palindromes" : "Non-Palindromes",
+                
+                // Downstream collector: Sorts the list by length
+                Collectors.collectingAndThen(
+                    Collectors.toList(),
+                    list -> list.stream()
+                        .sorted(Comparator.comparingInt(String::length))
+                        .collect(Collectors.toList())
+                )
+            ));
+
+        System.out.println(result);
+    }
+}
 
