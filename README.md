@@ -2040,3 +2040,44 @@ public class Main {
 }
 IT -> [Java, Spring]
 HR -> [Communication, Recruitment]
+
+76. 3rd longest string based on stream
+
+
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<String> list = Arrays.asList(
+                "Java",
+                "SpringBoot",
+                "Microservices",
+                "AWS",
+                "ReactJS",
+                "Hibernate"
+        );
+
+        String thirdLongest = list.stream()
+                .sorted((a, b) -> Integer.compare(b.length(), a.length()))
+                .skip(2)
+                .findFirst()
+                .orElse(null);
+        String thirdLongest = list.stream()
+                .sorted(Comparator.comparing(String::length).reversed())
+                .skip(2)
+                .findFirst()
+                .orElse(null);
+        String thirdLongest = list.stream()
+                .sorted((a, b) -> b.length() - a.length())  // using minus
+                .skip(2)
+                .findFirst()
+                .orElse(null);
+        System.out.println(thirdLongest); // Hibernate
+    }
+}
+
+or 
+
+
