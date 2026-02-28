@@ -2006,3 +2006,37 @@ public class PalindromeSort {
     }
 }
 
+
+75. distinct skills per department using Java Stream
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Employee> employees = Arrays.asList(
+                new Employee("A", "IT", "Java"),
+                new Employee("B", "IT", "Spring"),
+                new Employee("C", "IT", "Java"),
+                new Employee("D", "HR", "Communication"),
+                new Employee("E", "HR", "Recruitment"),
+                new Employee("F", "HR", "Communication")
+        );
+
+        Map<String, Set<String>> result =
+                employees.stream()
+                        .collect(Collectors.groupingBy(
+                                Employee::getDepartment,
+                                Collectors.mapping(
+                                        Employee::getSkill,
+                                        Collectors.toSet()
+                                )
+                        ));
+
+        result.forEach((dept, skills) ->
+                System.out.println(dept + " -> " + skills));
+    }
+}
+IT -> [Java, Spring]
+HR -> [Communication, Recruitment]
