@@ -2093,7 +2093,12 @@ public class Main {
             .map(Integer::valueOf)          // 3. Convert back to Integer
             .collect(Collectors.toList());
 
-        System.out.println(result); // Output: [10, 15, 111, 1]
+       List<Integer> result = myList.stream()
+        .map(Object::toString)
+        .filter(s -> s.startsWith("1"))
+        .map(Integer::valueOf)
+        .collect(Collectors.toList());
+       System.out.println(result); // Output: [10, 15, 111, 1]
     }
 }
 
