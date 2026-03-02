@@ -2078,6 +2078,23 @@ public class Main {
     }
 }
 
-or 
+77. To find numbers starting with 1 using Java Streams
+
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(10, 22, 15, 8, 111, 45, 1);
+
+        List<Integer> result = numbers.stream()
+            .map(String::valueOf)           // 1. Convert to String
+            .filter(s -> s.startsWith("1"))  // 2. Filter logic
+            .map(Integer::valueOf)          // 3. Convert back to Integer
+            .collect(Collectors.toList());
+
+        System.out.println(result); // Output: [10, 15, 111, 1]
+    }
+}
 
 
