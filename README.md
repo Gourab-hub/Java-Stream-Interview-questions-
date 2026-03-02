@@ -2097,4 +2097,20 @@ public class Main {
     }
 }
 
+78.mapToInt() is used to convert a Stream of objects into an IntStream.
+
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> list = Arrays.asList("10", "20", "30");
+
+        int sum = list.stream()
+                .mapToInt(Integer::parseInt)
+                .sum();
+
+        System.out.println(sum); // 60
+    }
+}
 
