@@ -2119,3 +2119,17 @@ public class Main {
     }
 }
 
+79. You want the special character count using Java Stream for the string "JaEfV&a!".
+
+public class Main {
+    public static void main(String[] args) {
+
+        String str = "JaEfV&a!";
+
+        long count = str.chars()
+                .filter(ch -> !Character.isLetterOrDigit(ch) && !Character.isWhitespace(ch))
+                .count();
+
+        System.out.println("Special character count = " + count);
+    }
+}
