@@ -2133,3 +2133,42 @@ public class Main {
         System.out.println("Special character count = " + count);
     }
 }
+80. Sort numbers by frequency (ascending) and return unique numbers in that order.
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Integer> arr = Arrays.asList(1,2,3,3,4,3,3,1,1,2);
+
+        List<Integer> result = arr.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+        System.out.println(result); //[4, 2, 1, 3]
+    }
+}
+81. you need sorting by key, then TreeMap works directly because TreeMap automatically sorts by key.
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Integer> arr = Arrays.asList(1,2,3,3,4,3,3,1,1,2);
+
+        Map<Integer, Long> map = arr.stream()
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        TreeMap::new,
+                        Collectors.counting()
+                ));
+
+        System.out.println(map); //{1=3, 2=2, 3=4, 4=1}
+    }
+}
