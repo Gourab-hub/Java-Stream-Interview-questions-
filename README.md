@@ -2199,3 +2199,55 @@ public class Interview {
         sortedList.forEach(System.out::println);
     }
 }
+83. 
+Extract all skills from all employees
+Remove duplicate skills
+Sort the skills in ascending order
+Return the result as a List<String> using Java Streams
+
+public class Interview {
+    public static void main(String[] args) {
+
+        List<Employee> employees = Arrays.asList(
+                new Employee(1, "Amit", Arrays.asList("Java", "Spring", "Docker")),
+                new Employee(2, "Neha", Arrays.asList("Java", "Kafka")),
+                new Employee(3, "Ravi", Arrays.asList("AWS", "Docker", "Spring"))
+        );
+
+        List<String> allSkills = employees.stream()
+                .flatMap(e -> e.getSkills().stream()) // flatten
+                .distinct()                           // remove duplicates
+                .sorted()                             // sort ascending
+                .collect(Collectors.toList());
+
+        System.out.println(allSkills);
+    }
+}
+84.   
+Convert the list into a Map<Integer, Employee>
+Use id as the key
+If duplicate IDs exist, keep the employee with the higher salary
+Print the final map
+
+public class Interview {
+    public static void main(String[] args) {
+
+        List<Employee> employees = Arrays.asList(
+                new Employee(1, "Amit", "IT", 90000),
+                new Employee(2, "Ravi", "HR", 120000),
+                new Employee(1, "Neha", "IT", 110000), // duplicate id
+                new Employee(3, "Pooja", "Finance", 80000),
+                new Employee(2, "Kiran", "HR", 95000)  // duplicate id
+        );
+
+        Map<Integer, Employee> empMap = employees.stream()
+                .collect(Collectors.toMap(
+                        Employee::getId,   // key mapper
+                        e -> e,            // value mapper
+                        (e1, e2) -> e1.getSalary() >= e2.getSalary() ? e1 : e2
+                ));
+
+        empMap.forEach((id, emp) ->
+                System.out.println(id + " -> " + emp));
+    }
+}
