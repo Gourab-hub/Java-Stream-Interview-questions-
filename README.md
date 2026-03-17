@@ -2172,3 +2172,30 @@ public class Main {
         System.out.println(map); //{1=3, 2=2, 3=4, 4=1}
     }
 }
+82. 
+Sort employees by salary in descending order
+If two employees have the same salary, then sort them by name in ascending order (case-insensitive)
+Return the sorted list using Java Streams
+
+public class Interview {
+    public static void main(String[] args) {
+
+        List<Employee> employees = Arrays.asList(
+                new Employee("Amit", 90000),
+                new Employee("Neha", 90000),
+                new Employee("Ravi", 120000),
+                new Employee("Pooja", 120000),
+                new Employee("Kiran", 85000)
+        );
+
+        List<Employee> sortedList = employees.stream()
+                .sorted(Comparator
+                        .comparingDouble(Employee::getSalary)
+                        .reversed()
+                        .thenComparing(e -> e.getName().toLowerCase())
+                )
+                .collect(Collectors.toList());
+
+        sortedList.forEach(System.out::println);
+    }
+}
