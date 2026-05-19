@@ -2253,14 +2253,14 @@ public class Interview {
 }
 
 85. You have a list of `Employee` objects (name, salary, designation). Using Java 8, get the "second highest salary"
-
+{
 Optional<Employee> employee = employees.stream()
         .sorted(Comparator.comparing(Employee::getSalary).reversed())
         .skip(1)
         .findFirst();
 
 employee.ifPresent(System.out::println);
-
+}
 or 
 
 List<Employee> employees = Arrays.asList(
