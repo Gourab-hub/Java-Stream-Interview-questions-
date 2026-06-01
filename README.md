@@ -2316,9 +2316,11 @@ public class Main {
 87.
 
 List<String> names = List.of("Alice", "Bob", "Charlie");
+
 Stream<String> stream = names.stream();
 
 long count = stream.count();
+
 System.out.println("Count: " + count);
 
 stream.forEach(System.out::println);
