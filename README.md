@@ -2313,6 +2313,33 @@ public class Main {
     }
 }
 
+or 
+
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Main {
+    public static void main(String[] args) {
+
+        int[] obj1 = {-5, 11, 4, 0, 8};
+        int[] obj2 = {5, 11, 1, 0, 2};
+        int[] obj3 = {3, 1, -8, 7};
+
+        int sum = IntStream.concat(
+                        IntStream.concat(
+                                Arrays.stream(obj1),
+                                Arrays.stream(obj2)
+                        ),
+                        Arrays.stream(obj3)
+                )
+                .filter(n -> n >= 0) // remove negative values
+                .distinct()          // remove duplicates
+                .sum();
+
+        System.out.println(sum); // 41
+    }
+}
+
 87.
 
 List<String> names = List.of("Alice", "Bob", "Charlie");
