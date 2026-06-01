@@ -2279,3 +2279,52 @@ List<Employee> employees = Arrays.asList(
                 .findFirst();
 
         secondHighestSalary.ifPresent(System.out::println);
+
+86.
+Your stream has a few issues:
+Intstream should be IntStream
+Arrays need to be converted using Arrays.stream()
+To remove negative values, use e >= 0
+sum() should be called after the stream pipeline
+
+
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Integer[] obj1 = {-5, 11, 4, 0, 8};
+        Integer[] obj2 = {5, 11, 1, 0, 2};
+        Integer[] obj3 = {3, 1, -8, 7};
+
+        int sum = IntStream.concat(
+                        IntStream.concat(
+                                Arrays.stream(obj1).mapToInt(Integer::intValue),
+                                Arrays.stream(obj2).mapToInt(Integer::intValue)
+                        ),
+                        Arrays.stream(obj3).mapToInt(Integer::intValue)
+                )
+                .filter(e -> e >= 0)   // remove negatives
+                .distinct()            // remove duplicates
+                .sum();
+
+        System.out.println(sum);
+    }
+}
+
+87.
+
+List<String> names = List.of("Alice", "Bob", "Charlie");
+Stream<String> stream = names.stream();
+
+long count = stream.count();
+System.out.println("Count: " + count);
+
+stream.forEach(System.out::println);
+
+Output:
+
+Count: 3
+Exception in thread "main" java.lang.IllegalStateException:
+stream has already been operated upon or closed
