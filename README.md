@@ -2357,3 +2357,41 @@ Output:
 Count: 3
 Exception in thread "main" java.lang.IllegalStateException:
 stream has already been operated upon or closed
+
+88. Sort the list of strings on the basis of last character in Java Stream
+
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> list = Arrays.asList("apple", "banana", "kiwi", "mango", "grape");
+
+        List<String> sorted = list.stream()
+                .sorted(Comparator.comparing(s -> s.charAt(s.length() - 1)))
+                .collect(Collectors.toList());
+
+        System.out.println(sorted);
+    }
+}
+or
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        List<String> words = Arrays.asList(
+                "apple",
+                "banana",
+                "kiwi",
+                "mango",
+                "grape"
+        );
+
+        List<String> sortedWords = words.stream()
+                .sorted((s1, s2) -> Character.compare(
+                        s1.charAt(s1.length() - 1),
+                        s2.charAt(s2.length() - 1)))
+                .collect(Collectors.toList());
+
+        System.out.println(sortedWords);
+    }
+}
