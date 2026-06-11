@@ -2395,3 +2395,61 @@ public class Main {
         System.out.println(sortedWords);
     }
 }
+89. Altimatrix interview 
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class OrderService {
+
+    private final Map<String, Order> orders = new HashMap<>();
+
+    /**
+     * Method 1: Adds a new order to the system.
+     * Uses the Order's explicit ID as the key to support reliable lookups.
+     */
+    public void addOrder(Order order) {
+        if (order != null && order.getOrderId() != null) {
+            orders.put(order.getOrderId(), order);
+        }
+    }
+
+    /**
+     * Method 2: Filters and retrieves all orders matching a specific status.
+     * Time Complexity: O(N)
+     */
+    public List<Order> getOrdersByStatus(OrderStatus status) {
+        return orders.values().stream()
+                .filter(order -> order.getStatus() == status)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Method 3: Calculates the average delivery time of all stored orders.
+     * Prevents NaN results by defaulting to 0.0 if empty.
+     * Time Complexity: O(N)
+     */
+    public double getAverageDeliveryTime() {
+        return orders.values().stream()
+                .mapToDouble(Order::getDeliveryTimeInMinutes)
+                .average()
+                .orElse(0.0);
+    }
+
+    /**
+     * Method 4: Aggregates order counts by customer and returns the top customer names.
+     * Time Complexity: O(N + K log K) where K is unique customers.
+     */
+    public List<String> getTopCustomers(int limit) {
+        return orders.values().stream()
+                .collect(Collectors.groupingBy(Order::getCustomerName, Collectors.counting()))
+                .entrySet().stream()
+                .sorted((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue())) // Descending order
+                .limit(limit)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+}
+
