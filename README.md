@@ -2453,3 +2453,38 @@ public class OrderService {
     }
 }
 
+90. Remove all non-numeric characters and return digits in ascending order
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        String str = "123rdf636i7";
+
+        String result = str.chars()
+                .filter(Character::isDigit)
+                .mapToObj(c -> String.valueOf((char) c))
+                .sorted()
+                .collect(Collectors.joining());
+
+        System.out.println(result);
+    }
+}
+
+91. Reverse only extracted numbers
+
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        String str = "123rdf636i7";
+
+        String result = str.chars()
+                .filter(Character::isDigit)
+                .mapToObj(c -> String.valueOf((char) c))
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.joining());
+
+        System.out.println(result);
+    }
+}
