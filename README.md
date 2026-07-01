@@ -2523,18 +2523,22 @@ class Result {
 public class Main {
 
     static Result getMaxProfit(List<StockCollection> stocks) {
-
+        //ASC
         stocks.sort(
             Comparator.comparing(
                 s -> LocalDate.parse(s.date)
             )
         );
-
+        //DESC
         stocks.sort(
               Comparator.comparing(
               (StockCollection s) -> LocalDate.parse(s.date)).reversed()
         );
-
+        //ASC
+        stocks.sort((a, b) -> a.date.compareTo(b.date));
+        //DESC
+        stocks.sort((a, b) -> b.date.compareTo(a.date));
+        
         int maxProfit = Integer.MIN_VALUE;
         String buy = "";
         String sell = "";
