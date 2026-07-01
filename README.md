@@ -2571,3 +2571,16 @@ public class Main {
         System.out.println(getMaxProfit(stocks));
     }
 }
+
+
+93. INTEGER Use distinct() in Stream:
+
+Integer[] obj3 = {3, 1, -8, 7, 7, 1, 3};
+
+List<Integer> result = Arrays.stream(obj3)
+        .distinct()
+        .toList();
+Integer[] result = Arrays.stream(obj3)
+        .distinct()
+        .toArray(Integer[]::new);
+System.out.println(result);
