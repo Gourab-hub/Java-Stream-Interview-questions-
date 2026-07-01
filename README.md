@@ -2488,3 +2488,77 @@ public class Main {
         System.out.println(result);
     }
 }
+
+92. LTM interview questions 
+import java.time.LocalDate;
+import java.util.*;
+
+class StockCollection {
+    String date;
+    int price;
+
+    public StockCollection(String date, int price) {
+        this.date = date;
+        this.price = price;
+    }
+}
+
+class Result {
+    int profit;
+    String buyDate;
+    String sellDate;
+
+    Result(int profit, String buyDate, String sellDate) {
+        this.profit = profit;
+        this.buyDate = buyDate;
+        this.sellDate = sellDate;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + profit + ", \"" + buyDate + "\", \"" + sellDate + "\"]";
+    }
+}
+
+public class Main {
+
+    static Result getMaxProfit(List<StockCollection> stocks) {
+
+        stocks.sort(
+            Comparator.comparing(
+                s -> LocalDate.parse(s.date)
+            )
+        );
+
+        int maxProfit = Integer.MIN_VALUE;
+        String buy = "";
+        String sell = "";
+
+        for (int i = 1; i < stocks.size(); i++) {
+
+            int profit =
+                stocks.get(i).price -
+                stocks.get(i - 1).price;
+
+            if (profit > maxProfit) {
+                maxProfit = profit;
+                buy = stocks.get(i - 1).date;
+                sell = stocks.get(i).date;
+            }
+        }
+
+        return new Result(maxProfit, buy, sell);
+    }
+
+    public static void main(String[] args) {
+
+        List<StockCollection> stocks = Arrays.asList(
+            new StockCollection("2026-06-01", 2),
+            new StockCollection("2026-06-02", 22),
+            new StockCollection("2026-06-03", 29),
+            new StockCollection("2026-06-04", 21)
+        );
+
+        System.out.println(getMaxProfit(stocks));
+    }
+}
