@@ -2530,6 +2530,11 @@ public class Main {
             )
         );
 
+        stocks.sort(
+              Comparator.comparing(
+              (StockCollection s) -> LocalDate.parse(s.date)).reversed()
+        );
+
         int maxProfit = Integer.MIN_VALUE;
         String buy = "";
         String sell = "";
