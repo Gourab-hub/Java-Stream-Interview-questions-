@@ -2584,3 +2584,88 @@ Integer[] result = Arrays.stream(obj3)
         .distinct()
         .toArray(Integer[]::new);
 System.out.println(result);
+
+
+94. Altassian
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class EmployeeStreamDemo {
+
+    // Employee class-টি এখন main ক্লাসের ভেতরেই আছে
+    public static class Employee {
+        private final int id; // Unique key
+        private String name;
+        private String department;
+        private double salary;
+
+        public Employee(int id, String name, String department, double salary) {
+            this.id = id;
+            this.name = name;
+            this.department = department;
+            this.salary = salary;
+        }
+
+        public int getId() { return id; }
+        public String getName() { return name; }
+        public String getDepartment() { return department; }
+        public double getSalary() { return salary; }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Employee employee = (Employee) o;
+            return id == employee.id;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Employee{id=%d, name='%s', dept='%s', salary=%.2f}", id, name, department, salary);
+        }
+    }
+
+    public static void main(String[] args) {
+        // Sample employee list (এখানে id '1' ডাবল দেওয়া আছে uniqueness চেক করার জন্য)
+        List<Employee> employees = Arrays.asList(
+            new Employee(1, "Alice", "IT", 75000),
+            new Employee(2, "Bob", "HR", 55000),
+            new Employee(3, "Charlie", "IT", 90000),
+            new Employee(4, "Diana", "Finance", 65000),
+            new Employee(1, "Alice Duplicate", "IT", 75000) 
+        );
+
+        System.out.println("--- 1. Highest Paid Employee ---");
+        Employee highestPaid = employees.stream()
+            .distinct() // Unique key (id) দিয়ে ডুপ্লিকেট বাদ দিচ্ছে
+            .max(Comparator.comparingDouble(Employee::getSalary))
+            .orElse(null);
+        System.out.println(highestPaid);
+
+        System.out.println("\n--- 2. Average Salary by Department ---");
+        Map<String, Double> avgSalaryByDept = employees.stream()
+            .distinct()
+            .collect(Collectors.groupingBy(
+                Employee::getDepartment,
+                Collectors.averagingDouble(Employee::getSalary)
+            ));
+        avgSalaryByDept.forEach((dept, avg) -> 
+            System.out.println(dept + ": ₹" + String.format("%.2f", avg))
+        );
+
+        System.out.println("\n--- 3. Earners > ₹60,000 (Sorted Descending) ---");
+        List<Employee> highEarnersSorted = employees.stream()
+            .distinct()
+            .filter(e -> e.getSalary() > 60000)
+            .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+            .collect(Collectors.toList());
+        
+        highEarnersSorted.forEach(System.out::println);
+    }
+}
